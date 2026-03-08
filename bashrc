@@ -24,7 +24,7 @@ if [ -d ~/.bashrc.d ]; then
 fi
 unset rc
 
-# .bashrc
+export LC_COLLATE=C
 
 # 1. Source global definitions (Standar EL10)
 if [ -f /etc/bashrc ]; then
@@ -33,17 +33,37 @@ fi
 
 # 2. Prompt Berwarna (User@Host:Path)
 # Menampilkan warna hijau untuk user biasa, merah untuk root
-if [ $UID -eq 0 ]; then
-    PS1='\[\e[1;31m\]\u\[\e[1;33m\]@\h \[\e[1;34m\]\W\[\e[0m\] \$ '
+if [ -n "$TMUX" ]; then
+    # --- PROMPT KHUSUS DI DALAM TMUX ---
+    if [ "$EUID" -eq 0 ]; then
+        # Prompt Root di Tmux (Warna Merah: 1;31)
+        PS1='\[\e[1;31m\]\u\[\e[1;33m\]@\h \[\e[1;35m\]TMUX in \[\e[1;34m\]\w\[\e[0m\] \n# '
+    else
+        # Prompt User di Tmux (Warna Hijau: 1;32)
+        PS1='\[\e[1;32m\]\u\[\e[1;33m\]@\h \[\e[1;35m\]TMUX in \[\e[1;34m\]\w\[\e[0m\] \n$ '
+    fi
 else
-    PS1='\[\e[1;32m\]\u\[\e[1;33m\]@\h \[\e[1;34m\]\w\[\e[0m\] \$ '
+    # --- PROMPT BIASA (DI LUAR TMUX) ---
+    if [ "$EUID" -eq 0 ]; then
+        # Prompt Root (Warna Merah: 1;31)
+        PS1='\[\e[1;31m\]\u\[\e[1;33m\]@\h \[\e[1;35m\]in \[\e[1;34m\]\w\[\e[0m\] # '
+    else
+        # Prompt User (Warna Hijau: 1;32)
+        PS1='\[\e[1;32m\]\u\[\e[1;33m\]@\h \[\e[1;35m\]in \[\e[1;34m\]\w\[\e[0m\] $ '
+    fi
 fi
 
 # 3. Alias Navigasi & List
 alias ..='cd ..'
 alias ...='cd ../..'
 alias .3='cd ../../../'
-alias ll='ls -lha --color=auto --group-directories-first'
+# alias ll='LC_COLLATE=C ls -la --group-directories-first --color=auto'
+alias ll='LC_COLLATE=C ls -lahF --group-directories-first --color=auto --time-style=long-iso'
+# Mengurutkan berdasarkan nama (tetap berwarna)
+alias llsort='ll --color=always | sort'
+# Mengurutkan berdasarkan ukuran file (Human Readable)
+alias llsize='ll --color=always | sort -h -k5'
+alias llt='ll -tr'
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
@@ -66,7 +86,10 @@ alias search='dnf search'
 # 7. Fastfech
 alias fastfetch='fastfetch --logo /usr/share/ign-config/ign-fastfetch.txt'
 
-# 8. Fungsi Tambahan: Ekstrak segala jenis file
+# 8. ign-config-update
+alias ign-config-update='curl -L s.id/ignconfig | bash'
+
+# 9. Fungsi Tambahan: Ekstrak segala jenis file    
 ex ()
 {
   if [ -f $1 ] ; then
@@ -88,4 +111,4 @@ ex ()
     echo "'$1' is not a valid file"
   fi
 }
- 
+
