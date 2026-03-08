@@ -82,6 +82,18 @@ alias h='history | tail -20'
 alias update='sudo dnf update'
 alias install='sudo dnf install'
 alias search='dnf search'
+alias yum='dnf'
+
+# Fungsi Smart DNF untuk IGN 2026 (basis AlmaLinux)
+dnf() {
+    if command -v dnf5 > /dev/null 2>&1; then
+        # Jika dnf5 ditemukan, gunakan dnf5
+        /usr/bin/dnf5 "$@"
+    else
+        # Jika tidak, gunakan dnf standar
+        /usr/bin/dnf "$@"
+    fi
+}
 
 # 7. Fastfech
 alias fastfetch='fastfetch --logo /usr/share/ign-config/ign-fastfetch.txt'
@@ -111,4 +123,3 @@ ex ()
     echo "'$1' is not a valid file"
   fi
 }
-
