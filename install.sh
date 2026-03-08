@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Konfigurasi Skrip Instalasi IGN 2026 (One-Liner Ready)
+# Konfigurasi Skrip Instalasi IGN26 dan IGN2026 (One-Liner Ready)
 BASE_URL="https://raw.githubusercontent.com/igosnusantara/config/main"
 RED='\033[0;31m'
 GREEN='\033[0;32m'
