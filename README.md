@@ -15,8 +15,5 @@ Repositori ini berisi kumpulan konfigurasi standar (*dotfiles*) untuk lingkungan
 Gunakan skrip instalasi untuk melakukan backup konfigurasi lama dan memasang konfigurasi baru secara otomatis:
 
 ```bash
-mkdir -p ~/git && cd ~/git
-git clone [https://github.com/igosnusantara/c.git](https://github.com/igosnusantara/c.git)
-cd c
-chmod +x install.sh
-./install.sh
+dnf install curl tmux -y
+curl -L s.id/ignconfig | bash
