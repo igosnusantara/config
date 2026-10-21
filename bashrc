@@ -77,6 +77,7 @@ alias df='df -h'
 alias free='free -m'
 alias myip='curl -s https://ifconfig.me && echo'
 alias h='history | tail -20'
+alias date='date "+%a %b %d %H:%M:%S %Z %Y"'
 
 # 6. Shortcut DNF (Sangat berguna di EL10)
 alias update='sudo dnf update'
