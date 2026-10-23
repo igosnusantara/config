@@ -1,6 +1,6 @@
-# IGOS Nusantara (IGN) 2026 Configuration 🚀
+# IGOS Nusantara 26 Configuration 🚀
 
-Repositori ini berisi kumpulan konfigurasi standar (*dotfiles*) untuk lingkungan terminal **IGOS Nusantara 2026**, yang juga kompatibel dengan distro Linux lainnya seperti Fedora, AlmaLinux, Ubuntu, dan Debian.
+Repositori ini berisi kumpulan konfigurasi standar (*dotfiles*) untuk lingkungan terminal **IGOS Nusantara 26**, yang juga kompatibel dengan distro Linux lainnya seperti Fedora, AlmaLinux, Ubuntu, dan Debian.
 
 ## 📋 Daftar Konfigurasi
 - **Bash**: Prompt berwarna, alias praktis, dan optimasi shell.
